@@ -17,7 +17,6 @@ class Solution:
         
         for i,c in enumerate(mi):
             if c!=ma[i]:
-                mi = ma[:i]
-                break
+                return mi[:i]
                 
         return mi
