@@ -9,5 +9,4 @@ class Solution:
                 if i>0: dp[i][j] += dp[i-1][j] 
                 if j>0: dp[i][j] += dp[i][j-1]
                 
-        print(dp)
         return dp[-1][-1]
