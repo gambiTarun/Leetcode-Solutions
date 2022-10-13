@@ -14,11 +14,13 @@ class Solution:
                 return 0
             
             lh = dfs(n.left)
+            if lh==-1: return -1
             rh = dfs(n.right)
+            if rh==-1: return -1
             
-            res.append(abs(lh-rh)<2)
-            
-            return max(lh,rh)+1
+            if abs(lh-rh)>1:
+                return -1
+            else:
+                return max(lh,rh)+1
         
-        dfs(root)
-        return all(res)
+        return dfs(root)!=-1
