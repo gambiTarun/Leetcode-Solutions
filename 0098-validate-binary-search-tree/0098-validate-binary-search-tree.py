@@ -35,7 +35,6 @@ class Solution:
                 return False
             
             if (not dfs(n.left, mi, n.val)) or (not dfs(n.right, n.val, ma)):
-                # print(n.val)
                 return False
             
             return True
