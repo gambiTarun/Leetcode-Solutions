@@ -7,22 +7,39 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         
-        self.lastv = None
+#         self.lastv = None
         
-        def dfs(n):
+#         def dfs(n):
+#             if not n:
+#                 return True
+            
+#             if not dfs(n.left):
+#                 return False
+            
+#             if self.lastv!=None and self.lastv>=n.val:
+#                 return False
+#             self.lastv = n.val
+            
+#             if not dfs(n.right):
+#                 return False
+            
+#             return True
+            
+#         return dfs(root)
+        
+        def dfs(n, mi, ma):
             if not n:
                 return True
             
-            if not dfs(n.left):
+            if (mi!=None and n.val<=mi) or (ma!=None and n.val>=ma):
                 return False
             
-            if self.lastv!=None and self.lastv>=n.val:
-                return False
-            self.lastv = n.val
-            
-            if not dfs(n.right):
+            if (not dfs(n.left, mi, n.val)) or (not dfs(n.right, n.val, ma)):
+                # print(n.val)
                 return False
             
             return True
+        
+        return dfs(root,None,None)
             
-        return dfs(root)
+        
