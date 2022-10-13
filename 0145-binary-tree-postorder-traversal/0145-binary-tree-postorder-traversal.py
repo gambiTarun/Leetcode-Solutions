@@ -8,19 +8,36 @@ class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
         
         
-        st = deque()
-        res = []
-        curr = root
+#         st = deque()
+#         res = []
+#         curr = root
         
-        while st or curr:
+#         while st or curr:
             
-            if curr:
-                st.append(curr)
-                res.insert(0,curr.val)
-                curr = curr.right
+#             if curr:
+#                 st.append(curr)
+#                 res.insert(0,curr.val)
+#                 curr = curr.right
+#             else:
+#                 curr = st.pop()
+#                 curr = curr.left
+                
+                
+#         return res
+
+        res = []
+        if not root: return res
+        
+        st = deque()
+        st += [root]*2
+    
+        while st:
+            curr = st.pop()
+            if st and st[-1]==curr:
+                if curr.right: st += [curr.right]*2
+                if curr.left: st += [curr.left]*2
             else:
-                curr = st.pop()
-                curr = curr.left
-                
-                
+                res.append(curr.val)
+    
         return res
+            
