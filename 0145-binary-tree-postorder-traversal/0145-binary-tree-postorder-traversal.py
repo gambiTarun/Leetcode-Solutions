@@ -25,19 +25,40 @@ class Solution:
                 
 #         return res
 
-        res = []
-        if not root: return res
+#         res = []
+#         if not root: return res
         
+#         st = deque()
+#         st += [root]*2
+    
+#         while st:
+#             curr = st.pop()
+#             if st and st[-1]==curr:
+#                 if curr.right: st += [curr.right]*2
+#                 if curr.left: st += [curr.left]*2
+#             else:
+#                 res.append(curr.val)
+    
+#         return res
+
         st = deque()
-        st += [root]*2
-    
-        while st:
-            curr = st.pop()
-            if st and st[-1]==curr:
-                if curr.right: st += [curr.right]*2
-                if curr.left: st += [curr.left]*2
+        curr = root
+        res = []
+        
+        while st or curr:
+            if curr:
+                st.append(curr)
+                curr = curr.left
             else:
-                res.append(curr.val)
-    
+                temp = st[-1].right
+                if not temp:
+                    temp = st.pop()
+                    res.append(temp.val)
+                    while st and temp==st[-1].right:
+                        temp = st.pop()
+                        res.append(temp.val)
+                else:
+                    curr = temp
+        
         return res
-            
+                    
