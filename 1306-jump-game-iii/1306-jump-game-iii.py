@@ -6,7 +6,7 @@ class Solution:
         q.append(start)
         
         while q:
-            i = q.pop()
+            i = q.popleft()
             
             if not 0<=i<len(arr) or arr[i]<0:   
                 continue
