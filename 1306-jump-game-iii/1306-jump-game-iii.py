@@ -8,13 +8,12 @@ class Solution:
         while q:
             i = q.pop()
             
-            if not 0<=i<len(arr) or arr[i]==-1:   
+            if not 0<=i<len(arr) or arr[i]<0:   
                 continue
             
             if arr[i] == 0:
                 return True
-            m = arr[i]
-            arr[i]=-1
+            arr[i] *= -1
             
-            q.append(i-m)
-            q.append(i+m)
+            q.append(i-arr[i])
+            q.append(i+arr[i])
