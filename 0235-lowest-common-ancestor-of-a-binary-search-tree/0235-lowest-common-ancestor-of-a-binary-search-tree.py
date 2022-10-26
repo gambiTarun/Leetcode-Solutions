@@ -8,26 +8,36 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         
-        def find(n):
-            if not n: return        
-            if n.val==p.val or n.val==q.val: return n
+#         def find(n):
+#             if not n: return        
+#             if n.val==p.val or n.val==q.val: return n
             
-            inl = found(n.left,p)
-            inr = found(n.right,q)
+#             inl = found(n.left,p)
+#             inr = found(n.right,q)
             
-            if inl and not inr:
-                return find(n.left)
-            elif inr and not inl:
-                return find(n.right)
+#             if inl and not inr:
+#                 return find(n.left)
+#             elif inr and not inl:
+#                 return find(n.right)
             
-            return n
+#             return n
             
                 
-        def found(n,x):
-            if not n: return False
-            if n.val==x.val: return True
+#         def found(n,x):
+#             if not n: return False
+#             if n.val==x.val: return True
             
-            return found(n.left,x) or found(n.right,x)
+#             return found(n.left,x) or found(n.right,x)
         
         
-        return find(root)
+#         return find(root)
+
+        if not root:
+            return None
+        
+        if max(p.val,q.val) < root.val:
+            return self.lowestCommonAncestor(root.left, p, q)
+        elif min(p.val,q.val) > root.val:
+            return self.lowestCommonAncestor(root.right, p, q)
+        else:
+            return root
