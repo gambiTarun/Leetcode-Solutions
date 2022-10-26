@@ -50,7 +50,7 @@ class Solution:
             q.append((0,j))
             
         while q:
-            i,j = q.popleft()
+            i,j = q.pop()
             if 0<=i<m and 0<=j<n and board[i][j]=='O':
                 board[i][j]='T'
                 for di,dj in [[0,1],[1,0],[-1,0],[0,-1]]:
