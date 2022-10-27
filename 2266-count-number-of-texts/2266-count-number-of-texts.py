@@ -1,8 +1,7 @@
 class Solution:
     def countTexts(self, pressedKeys: str) -> int:
         
-        dp = [0]*(len(pressedKeys)+1)
-        dp[0] = 1
+        dp = [1]*(len(pressedKeys)+1)
         
         for i in range(1,len(pressedKeys)+1):
             dp[i] = dp[i-1]
