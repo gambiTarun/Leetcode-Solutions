@@ -5,8 +5,7 @@ class Solution:
         dp[0] = 0
         for i in range(amount+1):
             for j in coins:
-                if i==j: dp[i] = 1
-                if i>j:
+                if i>=j:
                     dp[i] = min(dp[i], dp[i-j]+1)
                     
                     
