@@ -9,7 +9,7 @@ class Solution:
         
 #         return dp[0][n]
         
-        @cache
+        @lru_cache(None)
         def eggs(f):
             
             return min([1+max(i-1, eggs(f-i)) for i in range(1,f)], default=1)
