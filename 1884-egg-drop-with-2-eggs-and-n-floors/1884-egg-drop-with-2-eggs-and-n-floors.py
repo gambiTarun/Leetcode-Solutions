@@ -1,4 +1,5 @@
 class Solution:
+    @cache
     def twoEggDrop(self, n: int) -> int:
         
 #         dp = [[0]*(n+1) for _ in range(n+1)]
@@ -9,9 +10,4 @@ class Solution:
         
 #         return dp[0][n]
         
-        @cache
-        def eggs(f):
-            
-            return min([1+max(i-1, eggs(f-i)) for i in range(1,f)], default=1)
-        
-        return eggs(n)
+        return min([1+max(i-1,self.twoEggDrop(n-i)) for i in range(1,n)], default=1)
