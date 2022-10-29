@@ -11,13 +11,15 @@ class Solution:
         dp = [[False]*(len(nums)+1) for _ in range(tar+1)]
         dp[0][0] = True
         
-        for j in range(1,len(nums)+1):
-            for i in range(tar+1):
+        for i in range(tar+1):
+            for j in range(1,len(nums)+1):
+            
                 dp[i][j] = dp[i][j-1]
                 if i>=nums[j-1]:
                     dp[i][j] = dp[i][j-1] or dp[i-nums[j-1]][j-1]
                 
         return dp[tar][len(nums)]
+    
 #         dp = [False]*(tar+1)
 #         dp[0] = True
         
