@@ -14,30 +14,31 @@ class Solution:
         def dfs(n):
             if not n:
                 return 
-            d[n] = []
+            
+            node = Node(n.val)
+            d[n] = node
             
             for x in n.neighbors:
                 if x not in d:
-                    dfs(x)
-                    
-                d[n].append(x)
-                
-        def dfscreate(n,d):
-            if not n:
-                return Node()
-            
-            node = Node(n.val)
-            vis[n] = node
-            for x in d[n]:
-                if x not in vis:
-                    node.neighbors.append(dfscreate(x,d))
+                    node.neighbors.append(dfs(x))
                 else:
-                    node.neighbors.append(vis[x])
-            
+                    node.neighbors.append(d[x])
+                    
             return node
+                
+#         def dfscreate(n,d):
+#             if not n:
+#                 return Node()
             
-        dfs(node)
-        vis = {}
-        
-        return dfscreate(node,d) if d else None
+#             node = Node(n.val)
+#             vis[n] = node
+#             for x in d[n]:
+#                 if x not in vis:
+#                     node.neighbors.append(dfscreate(x,d))
+#                 else:
+#                     node.neighbors.append(vis[x])
+            
+#             return node
+            
+        return dfs(node)
         
