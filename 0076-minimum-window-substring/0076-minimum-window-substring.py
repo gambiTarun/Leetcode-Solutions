@@ -22,23 +22,22 @@ class Solution:
         l,r = m[c],m[c]
         res = s
         dt = Counter(t)
-        dres = Counter(s[l])
+        ds = Counter(s[l])
         while r!=len(s):
             # print(dt, dres, res, l, r, c)
-            if not (dt - dres):
+            if not (dt - ds):
                 if (r-l+1)<len(res):
                     res = s[l:r+1]
                 c += 1
                 if c==len(m): break
                 for i in range(l,m[c]):
-                    if dres[s[i]] == 1: dres.pop(s[i])
-                    else: dres[s[i]] -= 1
+                    if ds[s[i]] == 1: ds.pop(s[i])
+                    else: ds[s[i]] -= 1
                 l = m[c]
             else:
                 r += 1
                 if r==len(s): break
-                if s[r] in dres: dres[s[r]] += 1
-                else: dres[s[r]] = 1
+                if s[r] in ds: ds[s[r]] += 1
+                else: ds[s[r]] = 1
                 
-        
-        return "" if res==s and (Counter(t) - Counter(res)) else res
+        return "" if res==s and (dt - Counter(res)) else res
