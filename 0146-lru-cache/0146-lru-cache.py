@@ -27,12 +27,11 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         if key in self.cache: 
             self.remove(self.cache[key])
-            # self.append(self.cache[key])
-            # self.cache[key].val = value
         else:
             if len(self.cache)==self.cap: 
                 self.cache.pop(self.head.next.key)
                 self.remove(self.head.next)
+    
         self.cache[key] = Node(key,value)
         self.append(self.cache[key])
             
@@ -45,8 +44,6 @@ class LRUCache:
     def remove(self, nod):
         nod.next.prev = nod.prev
         nod.prev.next = nod.next
-        
-    
 
 # Your LRUCache object will be instantiated and called as such:
 # obj = LRUCache(capacity)
