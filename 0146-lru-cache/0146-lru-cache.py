@@ -11,10 +11,10 @@ class LRUCache:
         self.cache = {}
         self.head = Node(-1,-1)
         self.tail = Node(-1,-1)
-        self.head.prev = self.head
+        # self.head.prev = self.head
         self.head.next = self.tail
         self.tail.prev = self.head
-        self.tail.next = self.tail
+        # self.tail.next = self.tail
         self.cap = capacity
 
     def get(self, key: int) -> int:
@@ -29,7 +29,6 @@ class LRUCache:
             self.remove(self.cache[key])
             self.append(self.cache[key])
             self.cache[key].val = value
-        
         else:
             if len(self.cache)==self.cap: 
                 self.cache.pop(self.head.next.key)
