@@ -12,7 +12,6 @@ class Solution:
         else:   y = "0"
             
         mini = int(n.replace(x,y))
-        print(x,mini)
         
         for i in range(len(n)):
             if "0"<=n[i]<"9":
@@ -21,6 +20,5 @@ class Solution:
         
         y = "9"    
         maxi = int(n.replace(x,y))
-        print(x,maxi)
         
         return maxi-mini
