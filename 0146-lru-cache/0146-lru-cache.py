@@ -27,14 +27,14 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         if key in self.cache: 
             self.remove(self.cache[key])
-            self.append(self.cache[key])
-            self.cache[key].val = value
+            # self.append(self.cache[key])
+            # self.cache[key].val = value
         else:
             if len(self.cache)==self.cap: 
                 self.cache.pop(self.head.next.key)
                 self.remove(self.head.next)
-            self.cache[key] = Node(key,value)
-            self.append(self.cache[key])
+        self.cache[key] = Node(key,value)
+        self.append(self.cache[key])
             
     def append(self, nod):
         nod.prev = self.tail.prev
