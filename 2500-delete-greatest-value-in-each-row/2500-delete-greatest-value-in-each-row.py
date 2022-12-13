@@ -3,7 +3,7 @@ class Solution:
         for r in grid:
             r.sort()
             
-        print(grid)
+
         ans = 0
         for c in range(len(grid[0])):
             x = 0
