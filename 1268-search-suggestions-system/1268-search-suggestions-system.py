@@ -21,6 +21,9 @@ class Solution:
             node.end = True
 
         def findMatch(word,root,build,li):
+            if len(li)>=3:
+                return 
+            
             node = root
 
             for c in word:
@@ -29,7 +32,7 @@ class Solution:
                     return []
                 node = node.child[i]
             
-            if node.end and len(li)<3:
+            if node.end:
                 li.append(build)
 
             for i,n in enumerate(node.child):
