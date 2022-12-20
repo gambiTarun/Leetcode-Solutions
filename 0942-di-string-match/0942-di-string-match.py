@@ -3,7 +3,7 @@ class Solution:
         
         ans,l,r = [],0,len(s)
         
-        for c in s:
+        for c in s+s[-1]:
             if c=='I':
                 ans.append(l)
                 l+=1
@@ -11,6 +11,6 @@ class Solution:
                 ans.append(r)
                 r-=1
                 
-        ans += [l] if s[-1]=='I' else [r]
+        # ans += [l] if s[-1]=='I' else [r]
         
         return ans
