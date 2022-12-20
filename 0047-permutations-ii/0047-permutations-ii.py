@@ -1,22 +1,16 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
-        
-        def backtrack(li):
-            if len(li)==len(nums):
-                if li not in ans:
-                    ans.append(li.copy())
-                return 
+        nums.sort()
+        def backtrack(nu,li):
+            if not nu:
+                ans.append(li)
             
-            for i in range(len(nums)):
-                if i not in vis:
-                    li.append(nums[i])
-                    vis.add(i)
-                    backtrack(li)
-                    vis.remove(i)
-                    li.pop()
+            for i in range(len(nu)):
+                if i>0 and nu[i]==nu[i-1]:
+                    continue
+                backtrack(nu[:i]+nu[i+1:],li+[nu[i]])
                     
-        vis=set()
         ans=[]
-        backtrack([])
+        backtrack(nums,[])
         
         return ans
