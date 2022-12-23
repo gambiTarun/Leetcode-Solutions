@@ -2,7 +2,6 @@ class Solution:
     def getOrder(self, tasks: List[List[int]]) -> List[int]:
         
         alltasks = sorted([(t[0],t[1],i) for i,t in enumerate(tasks)])
-        print(alltasks)
         nexttask = []
         ans = []
         i = 0
