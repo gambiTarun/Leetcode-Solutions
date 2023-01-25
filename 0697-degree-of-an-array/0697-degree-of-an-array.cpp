@@ -18,9 +18,6 @@ public:
             // cout<<res<<","<<reslen<<endl;
         }
         
-        for(auto x:mp){
-            cout<<x.first<<":"<<x.second[0]<<","<<x.second[1]<<","<<x.second[2]<<endl;
-        }
         return reslen;
     }
 };
