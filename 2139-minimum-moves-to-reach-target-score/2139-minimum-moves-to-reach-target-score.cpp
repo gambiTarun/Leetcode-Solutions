@@ -7,7 +7,6 @@ public:
             target>>=1;
             maxDoubles--;
         }
-        cout<<target<<","<<c<<endl;
         return target+c-1;
     }
 };
