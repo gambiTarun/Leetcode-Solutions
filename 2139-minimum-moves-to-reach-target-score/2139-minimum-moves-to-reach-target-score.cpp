@@ -2,15 +2,12 @@ class Solution {
 public:
     int minMoves(int target, int maxDoubles) {
         int c=0;
-        while(maxDoubles && target){
-            if(target%2==0){
-                target>>=1;
-                maxDoubles--;
-            }
-            else
-                target--;
-            c++;
+        while(maxDoubles && target>1){
+            c += 1+target%2;
+            target>>=1;
+            maxDoubles--;
         }
+        cout<<target<<","<<c<<endl;
         return target+c-1;
     }
 };
