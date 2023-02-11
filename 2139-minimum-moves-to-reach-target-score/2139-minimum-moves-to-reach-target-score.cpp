@@ -4,7 +4,7 @@ public:
         int c=0;
         while(maxDoubles && target){
             if(target%2==0){
-                target/=2;
+                target>>=1;
                 maxDoubles--;
             }
             else
