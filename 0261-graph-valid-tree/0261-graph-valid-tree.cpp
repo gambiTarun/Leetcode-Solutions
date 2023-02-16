@@ -9,13 +9,11 @@ public:
             mp[e[1]].push_back(e[0]);
         }
         
-        for(int i=0;i<n;i++){
-            set<int> vis;
-            if(cycle(mp,vis,i,i))
-                return false;
-        }
+        set<int> vis;
+        if(cycle(mp,vis,0,0))
+            return false;
         
-        return true;
+        return vis.size()==n;
     }
     bool cycle(vector<vector<int>> &mp, set<int> &vis, int c, int p){
         if(vis.find(c)!=vis.end())
