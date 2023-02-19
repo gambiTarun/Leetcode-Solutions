@@ -18,8 +18,8 @@ public:
         while(!pq.empty()){
             int x = pq.top().second; pq.pop();
             // cout<<x<<endl;
-            if(vis[x]) continue;
-            vis[x] = 1;
+            // if(vis[x]) continue;
+            // vis[x] = 1;
             
             for(auto nei:m[x]){
                 if(dist[nei.first]>dist[x]+nei.second){
