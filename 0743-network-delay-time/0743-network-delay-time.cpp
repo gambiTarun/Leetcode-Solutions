@@ -6,7 +6,6 @@ public:
         priority_queue<dpair, vector<dpair>, greater<dpair>> pq;
         unordered_map<int, vector<pair<int,int>>> m;
         
-        vector<int> vis(n+1, 0);
         vector<int> dist(n+1,INT_MAX);
         dist[k]=0;
         pq.emplace(0,k);
