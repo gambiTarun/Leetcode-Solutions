@@ -1,7 +1,8 @@
 class StockPrice {
 public:
-    map<int,int> sp;
+    unordered_map<int,int> sp;
     multiset<int> s;
+    int last_time=0,last_price=-1;
     StockPrice() {
         
     }
@@ -11,10 +12,14 @@ public:
             s.erase(s.find(sp[timestamp]));
         s.insert(price);
         sp[timestamp]=price;
+        if(last_time<=timestamp){
+            last_time=timestamp;
+            last_price=price;
+        }
     }
     
     int current() {
-        return (--sp.end())->second;
+        return last_price;
     }
     
     int maximum() {
