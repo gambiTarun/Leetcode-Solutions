@@ -1,52 +1,47 @@
 class Trie{
-    public:
-    Trie *chars[26]={};
-    bool wordEnd = false;
+public:
+    Trie *child[26]={};
+    bool wordend = false;
 };
-
 class WordDictionary {
 public:
     Trie *root;
-    
+
     WordDictionary() {
         root = new Trie();    
     }
     
     void addWord(string word) {
-        Trie* curr = root;
+        Trie *node=root;
         for(char c:word){
-            if(!curr->chars[c-'a'])
-                curr->chars[c-'a'] = new Trie();
-            curr = curr->chars[c-'a'];
+            if(!node->child[c-'a'])
+                node->child[c-'a'] = new Trie();
+            node = node->child[c-'a'];
         }
-        curr->wordEnd = true;
+        node->wordend=true;
     }
     
     bool search(string word) {
-        return searchHelper(0,word,root);
-    }
-    
-    bool searchHelper(int st, string word, Trie* curr){
-        
-        for(int i=st;i<word.size();i++){
-            
-            if(word[i]!='.'){
-                if(!curr->chars[word[i]-'a']) return false;
-                curr=curr->chars[word[i]-'a'];
-            }
-            else{
+        Trie *node=root;
+        for(int i=0;i<word.size();i++){
+            if(word[i]=='.'){
                 bool found=false;
-                for(auto x:curr->chars){
-                    if(x) found |= searchHelper(i+1,word,x);
-                    if(found) return true;
+                for(int j=0;j<26;j++){
+                    if(node->child[j]){
+                        word[i] = j+'a';
+                        found |= search(word);
+                    }
                 }
-                return false;
+                return found;
+            }
+            else {
+                if(!node->child[word[i]-'a'])
+                    return false;
+                node = node->child[word[i]-'a'];
             }
         }
-        
-        return curr->wordEnd;
+        return node->wordend;
     }
-        
 };
 
 /**
