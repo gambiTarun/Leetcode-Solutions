@@ -23,11 +23,11 @@ public:
     }
     
     int maximum() {
-        return *(--s.end());
+        return *rbegin(s);
     }
     
     int minimum() {
-        return *(s.begin());
+        return *begin(s);
     }
 };
 
