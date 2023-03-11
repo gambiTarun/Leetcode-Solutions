@@ -31,11 +31,11 @@ public:
                 n++;
         }
         // cout<<n<<endl;
-        if(b[i][j]==1 && n>3)
+        if(b[i][j]>0 && n>3)
             b[i][j]++;
-        if(b[i][j]==1 && n<2)
+        if(b[i][j]>0 && n<2)
             b[i][j]++;
-        if(b[i][j]==0 && n==3)
+        if(b[i][j]<=0 && n==3)
             b[i][j]--;
             
     }
