@@ -15,7 +15,7 @@ public:
     
     int read(char *buf, int n) {
         int re=0,act=0,i=0;
-        cout<<n<<":"<<start<<","<<end<<endl;
+        // cout<<n<<":"<<start<<","<<end<<endl;
         
         if(start==0)
             end = read4(tmp);
@@ -36,7 +36,7 @@ public:
                 start=j;
             }
         }
-        cout<<i<<endl;
+        // cout<<i<<endl;
         // cout<<re<<endl;
         start = (start+1)%4;
         return i;
