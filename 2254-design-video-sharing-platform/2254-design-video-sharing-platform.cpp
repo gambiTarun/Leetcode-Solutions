@@ -2,20 +2,18 @@ class VideoSharingPlatform {
 public:
     unordered_map<int,string> vid;
     unordered_map<int,vector<int>> meta;
-    set<int> usedID;
-    int lastID;
+    priority_queue<int, vector<int>, greater<int>> usedID;
     VideoSharingPlatform() {
-        lastID=0;
+        usedID.push(0);
     }
     
     int upload(string video) {
         int id;
-        if(!usedID.empty()){
-            id=*usedID.begin();
-            usedID.erase(id);
-        }
-        else
-            id=lastID++;
+        id=usedID.top();
+        usedID.pop();
+        if(usedID.empty())
+            usedID.push(vid.size()+1);
+        
         vid[id] = video;
         meta[id] = {0,0,0};
         return id;
@@ -24,7 +22,7 @@ public:
     void remove(int videoId) {
         if(vid.find(videoId)==vid.end())
             return;
-        usedID.insert(videoId);
+        usedID.push(videoId);
         vid.erase(videoId);
         meta.erase(videoId);
     }
