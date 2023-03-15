@@ -16,7 +16,8 @@ public:
     int size;
     LRUCache(int capacity) {
         start = new Node(-1,-1,NULL,NULL);
-        end = new Node(-1,-1,NULL,NULL);
+        end = new Node(-1,-1,start,NULL);
+        start->next = end;
         size = capacity;
     }
     
@@ -38,12 +39,6 @@ public:
     }
     
     void put(int key, int value) {
-        if(mp.empty()){
-            mp[key] = new Node(key,value,start,end);
-            end->prev = mp[key];
-            start->next = mp[key];
-            return;
-        }
         
         if(mp.find(key)!=mp.end()){
             mp[key]->value = value;
