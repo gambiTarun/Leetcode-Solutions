@@ -15,7 +15,7 @@ public:
     }
     
     void visit(string url) {
-        if(curr->next) delFor(curr->next);
+        // if(curr->next) delFor(curr->next);
         curr->next = new Node(url,curr,NULL);
         curr = curr->next;
     }
