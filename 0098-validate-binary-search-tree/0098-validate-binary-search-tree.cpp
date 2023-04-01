@@ -10,23 +10,30 @@
  * };
  */
 class Solution {
-private:
-    TreeNode* prev=NULL;    
 public:
     bool isValidBST(TreeNode* root) {
-        return inorder(root);
-    }
-    bool inorder(TreeNode* r){
+        if(!root)
+            return true;
         
-        if(!r) return true;
-        
-        if(!inorder(r->left))
+        if(invalleft(root->left, root) || invalright(root->right, root))
             return false;
         
-        if(prev && r->val <= prev->val) return false;
-        
-        prev = r;
-        return inorder(r->right);
-        
+        return isValidBST(root->left) && isValidBST(root->right);
+    }
+    
+    int invalleft(TreeNode *node, TreeNode *root){
+        if(!node)
+            return false;
+        while(node->right)
+            node=node->right;
+        return node->val >= root->val;
+    }
+    
+    int invalright(TreeNode *node, TreeNode *root){
+        if(!node)
+            return false;
+        while(node->left)
+            node=node->left;
+        return node->val <= root->val;
     }
 };
