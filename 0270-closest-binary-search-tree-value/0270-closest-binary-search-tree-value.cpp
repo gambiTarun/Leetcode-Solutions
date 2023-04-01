@@ -16,7 +16,7 @@ public:
         while(root){
             int val = root->val;
             closest = abs(val-target)<=abs(closest-target)?val:closest;
-            root = val>=target?root->left:root->right;
+            root = val>target?root->left:root->right;
         }
         return closest;
     }
