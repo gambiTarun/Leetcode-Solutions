@@ -1,46 +1,44 @@
+class Node{
+public:
+    Node *chars[26];
+    bool end=false;
+};
 class Trie {
 public:
-    class TrieNode{
-        public:
-        TrieNode *children[26]={};
-        bool endOfWord = false;
-    };
-    
-    TrieNode* root;
-    
+    Node *root = new Node();
     Trie() {
-        root = new TrieNode();    
+        
     }
     
     void insert(string word) {
-        TrieNode* curr = root;
+        Node *node = root;
         
         for(char c:word){
-            if(!curr->children[c-'a'])
-                curr->children[c-'a'] = new TrieNode();
-            curr = curr->children[c-'a'];
+            if(!node->chars[c-'a'])
+                node->chars[c-'a'] = new Node();
+            node = node->chars[c-'a'];
         }
-        curr->endOfWord = true;
+        node->end=true;
     }
     
     bool search(string word) {
-        TrieNode* curr = root;
+        Node *node = root;
         
         for(char c:word){
-            if(!curr->children[c-'a'])
+            if(!node->chars[c-'a'])
                 return false;
-            curr = curr->children[c-'a'];
+            node = node->chars[c-'a'];
         }
-        return curr->endOfWord;
+        return node->end;
     }
     
     bool startsWith(string prefix) {
-        TrieNode* curr = root;
+        Node *node = root;
         
         for(char c:prefix){
-            if(!curr->children[c-'a'])
+            if(!node->chars[c-'a'])
                 return false;
-            curr = curr->children[c-'a'];
+            node = node->chars[c-'a'];
         }
         return true;
     }
