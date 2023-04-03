@@ -11,21 +11,17 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root)
-            return nullptr;
+        int pval = p->val;
+        int qval = q->val;
         
-        bool leftq = find(root->left,q);
-        bool leftp = find(root->left,p);
-        
-        if(leftq ^ leftp || root==p || root==q)
-            return root;
-        
-        return leftp?lowestCommonAncestor(root->left,p,q):lowestCommonAncestor(root->right,p,q);
-    }
-    
-    bool find(TreeNode* root, TreeNode* x){
-        if(!root)
-            return false;
-        return root==x || find(root->left,x) || find(root->right,x);
+        while(root){
+            if(pval<root->val && qval<root->val)
+                root = root->left;
+            else if(pval>root->val && qval>root->val)
+                root = root->right;
+            else
+                return root;
+        }
+        return nullptr;
     }
 };
