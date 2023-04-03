@@ -30,7 +30,7 @@ public:
             if(sub[j]=='.'){
                 bool found=false;
                 for(int i=0;i<26;i++){
-                    if(node->chars[i])
+                    if(!found && node->chars[i])
                         found |= searchHelper(sub.substr(j+1), node->chars[i]);
                 }
                 return found;
