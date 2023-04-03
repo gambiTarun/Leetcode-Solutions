@@ -21,7 +21,7 @@ public:
     
     int longest(TreeNode*node, bool &d){
         if(!node)
-            return d;
+            return 0;
         int l = longest(node->left,d);
         int r = longest(node->right,d);
         d |= abs(l-r)>1;
