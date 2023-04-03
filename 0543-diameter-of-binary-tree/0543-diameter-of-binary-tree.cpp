@@ -11,23 +11,19 @@
  */
 class Solution {
 public:
-    int maxd=0;
     int diameterOfBinaryTree(TreeNode* root) {
         if(!root)
             return 0;
-        
-        int lenl = dept(root->left, 0);
-        int lenr = dept(root->right, 0);
-        // cout<<lenl<<','<<lenr<<endl;
-        
-        maxd = max(maxd, lenl+lenr);
-        diameterOfBinaryTree(root->left);
-        diameterOfBinaryTree(root->right);
-        return maxd;
+        int res=0;
+        longest(root,res);
+        return res;
     }
-    int dept(TreeNode* root, int d){
+    int longest(TreeNode* root, int &dia){
         if(!root)
-            return d;
-        return max(dept(root->left,d+1), dept(root->right, d+1));
+            return 0;
+        int lenl = longest(root->left, dia);
+        int lenr = longest(root->right, dia);
+        dia = max(dia, lenl+lenr);
+        return max(lenl,lenr)+1;
     }
 };
