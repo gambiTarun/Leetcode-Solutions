@@ -10,21 +10,12 @@
 class Solution {
 public:
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if(!root)
-            return nullptr;
-        
-        bool leftq = find(root->left,q);
-        bool leftp = find(root->left,p);
-        
-        if(leftq ^ leftp || root==p || root==q)
+        if(!root || root==p || root==q)
             return root;
+        TreeNode *l = lowestCommonAncestor(root->left, p, q);
+        TreeNode *r = lowestCommonAncestor(root->right, p, q);
         
-        return leftp?lowestCommonAncestor(root->left,p,q):lowestCommonAncestor(root->right,p,q);
-    }
-    
-    bool find(TreeNode* root, TreeNode* x){
-        if(!root)
-            return false;
-        return root==x || find(root->left,x) || find(root->right,x);
+        return l&&r?root:(l?l:r);
+        
     }
 };
