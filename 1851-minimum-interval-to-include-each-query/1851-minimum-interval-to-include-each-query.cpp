@@ -13,7 +13,7 @@ public:
         vector<int> squers=queries, res;
         sort(squers.begin(),squers.end());
         sort(intervals.begin(),intervals.end());
-        priority_queue<vector<int>, vector<vector<int>>, Compare> pq;
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
         unordered_map<int,int> mp;
         int i=0;
         for(int q:squers){
