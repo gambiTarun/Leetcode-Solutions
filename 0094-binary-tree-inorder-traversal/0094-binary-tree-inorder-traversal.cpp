@@ -12,21 +12,35 @@
 class Solution {
 public:
     vector<int> inorderTraversal(TreeNode* root) {
-        stack<TreeNode*> s;
-        TreeNode *curr=root;
+        // morris traversal
+        
+        TreeNode *curr = root;
         vector<int> res;
-        while(curr || !s.empty()){
-            if(curr){
-                s.push(curr);
-                curr=curr->left;
-            }
-            else{
-                curr=s.top();
-                s.pop();
+        
+        while(curr){
+            // printing leftnode
+            if(curr->left==NULL){
                 res.push_back(curr->val);
                 curr=curr->right;
             }
+            else{                
+                TreeNode *tmp = curr->left;
+                while(tmp->right != NULL && tmp->right != curr)
+                    tmp = tmp->right;
+                // making new connections
+                if(tmp->right==NULL){
+                    tmp->right=curr;
+                    curr=curr->left;
+                }
+                //removing those connections
+                else{
+                    tmp->right=NULL;
+                    res.push_back(curr->val);
+                    curr=curr->right;
+                }
+            }
         }
+        
         return res;
     }
 };
