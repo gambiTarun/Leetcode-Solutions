@@ -1,30 +1,29 @@
 class Solution {
 public:
     bool validTree(int n, vector<vector<int>>& edges) {
-        if(edges.size()<n-1)
-            return false;
-        vector<vector<int>> mp(n);
+        unordered_map<int,vector<int>> adj;
         for(auto e:edges){
-            mp[e[0]].push_back(e[1]);
-            mp[e[1]].push_back(e[0]);
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
         }
         
-        set<int> vis;
-        if(cycle(mp,vis,0,0))
+        vector<int> vis(n,0);
+        if(cycle(adj,0,-1,vis))
             return false;
-        
-        return vis.size()==n;
+        for(int i=0;i<n;i++)
+            if(!vis[i])
+                return false;
+        return true;
     }
-    bool cycle(vector<vector<int>> &mp, set<int> &vis, int c, int p){
-        if(vis.find(c)!=vis.end())
+    
+    bool cycle(unordered_map<int,vector<int>> &adj, int c, int p, vector<int> &vis){
+        if(vis[c]==1)
             return true;
-        
-        vis.insert(c);
-        
-        for(auto n:mp[c]){
-            if(n!=p && cycle(mp,vis,n,c))
+        vis[c]=1;
+        for(auto n:adj[c])
+            if(n!=p && cycle(adj,n,c,vis))
                 return true;
-        }
+        
         return false;
     }
 };
