@@ -1,21 +1,26 @@
 class Solution {
 public:
     int leastInterval(vector<char>& tasks, int n) {
-        vector<int> freq(26);
-        for(auto c:tasks)
-            freq[c-'A']++;
+        unordered_map<char,int> frq;
+        int maxfr = 0;
+        char maxts = ' ';
+        for(char c:tasks){
+            frq[c] += 1;
+            if(frq[c]>maxfr){
+                maxfr = frq[c];
+                maxts = c;
+            }
+        }
         
-        sort(freq.begin(),freq.end());
+        int idle = (maxfr-1)*n;
+        for(auto x:frq){
+            if(x.first==maxts)
+                continue;
+            idle -= min(maxfr-1,x.second);
+        }
         
-        int x = freq.size()-1;
-        int maxfreq = freq[x--];
-        int idles = (maxfreq-1)*n;
+        return max(0,idle)+tasks.size();
         
-        while(x>=0 && idles>0)
-            idles-=min(maxfreq-1,freq[x--]);
         
-        idles = max(0,idles);
-        
-        return idles + tasks.size();
     }
 };
