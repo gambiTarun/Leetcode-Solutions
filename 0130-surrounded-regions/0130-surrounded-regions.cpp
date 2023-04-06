@@ -20,8 +20,8 @@ public:
         
         vector<vector<int>> dirs = {{-1,0},{0,-1},{1,0},{0,1}};
         while(!dq.empty()){
-            auto x = dq.front();
-            dq.pop_front();
+            auto x = dq.back();
+            dq.pop_back();
             
             board[x.first][x.second]='S';
             
