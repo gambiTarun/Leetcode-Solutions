@@ -1,35 +1,32 @@
 class Solution {
 public:
-    #define dpair pair<int,int>
-    
     int networkDelayTime(vector<vector<int>>& times, int n, int k) {
-        priority_queue<dpair, vector<dpair>, greater<dpair>> pq;
-        unordered_map<int, vector<pair<int,int>>> m;
+        vector<int> traveltime(n,INT_MAX);
+        unordered_map<int,vector<pair<int,int>>> adj;
+        for(auto t:times)
+            adj[t[0]].emplace_back(t[2],t[1]);
         
-        vector<int> dist(n+1,INT_MAX);
-        dist[k]=0;
+        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> pq;
         pq.emplace(0,k);
         
-        for(auto t:times){
-            m[t[0]].push_back(make_pair(t[1],t[2]));
-        }
-            
         while(!pq.empty()){
-            int x = pq.top().second; pq.pop();
-            // cout<<x<<endl;
-            // if(vis[x]) continue;
-            // vis[x] = 1;
+            auto x = pq.top();
+            pq.pop();
             
-            for(auto nei:m[x]){
-                if(dist[nei.first]>dist[x]+nei.second){
-                    dist[nei.first] = dist[x]+nei.second;
-                    pq.emplace(dist[nei.first],nei.first);
-                }
-            }
+            traveltime[x.second-1] = min(traveltime[x.second-1],x.first);
+            
+            if(!adj.count(x.second))
+                continue;
+            
+            for(auto n:adj[x.second])
+                if(traveltime[n.second-1]==INT_MAX)
+                    pq.emplace(n.first+x.first,n.second);
         }
         
-        int ans=*max_element(dist.begin()+1,dist.end());
+        for(int i=0;i<n;i++)
+            if(traveltime[i]==INT_MAX)
+                return -1;
         
-        return ans==INT_MAX?-1:ans;
+        return *max_element(begin(traveltime),end(traveltime));
     }
 };
