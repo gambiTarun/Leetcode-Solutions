@@ -12,23 +12,24 @@
 class Solution {
 public:
     vector<TreeNode*> allPossibleFBT(int n) {
-        unordered_map<int,vector<TreeNode*>> mp;
-        
-        mp[1] = {new TreeNode(0)};
-        
-        for(int i=3;i<=n;i+=2){
+        if(n%2==0)
+            return {};
+        unordered_map<int, vector<TreeNode*>> mp;
+        mp[1].push_back(new TreeNode(0));
+        int i=3;
+        for(int i=3;i<=n;i++){
             int sum = i-1;
-            int leftn = 1;
-            int rightn = sum-1;
-            while(leftn<sum){
-                for(auto l: mp[leftn]){
-                    for(auto r: mp[rightn]){
+            int ln = 1; 
+            int rn = i-2;
+            while(ln<sum){
+                for(auto l:mp[ln]){
+                    for(auto r:mp[rn]){
                         TreeNode *n = new TreeNode(0,l,r);
                         mp[i].push_back(n);
                     }
                 }
-                leftn+=2;
-                rightn-=2;
+                ln+=2;
+                rn-=2;
             }
         }
         
