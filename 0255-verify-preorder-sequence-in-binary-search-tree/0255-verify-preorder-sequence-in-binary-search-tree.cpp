@@ -7,7 +7,7 @@ public:
             if(x<curmin)
                 return false;
             while(!st.empty() && st.top()<x){
-                curmin = max(curmin,st.top());
+                curmin = st.top();
                 st.pop();
             }
             st.push(x);
