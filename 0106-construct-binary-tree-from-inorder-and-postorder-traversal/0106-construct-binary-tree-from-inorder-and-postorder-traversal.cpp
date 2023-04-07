@@ -16,8 +16,7 @@ public:
         for(int i=0;i<inorder.size();i++)
             mp[inorder[i]] = i;
         
-        reverse(postorder.begin(),postorder.end());
-        int ir=0;
+        int ir=postorder.size()-1;
         return helper(postorder,ir,inorder,0,inorder.size()-1,mp);
     }
     
@@ -25,7 +24,7 @@ public:
         if(s>e)
             return nullptr;
         
-        int split = postorder[ir++];
+        int split = postorder[ir--];
         TreeNode *right = helper(postorder,ir,inorder,mp[split]+1,e,mp);
         TreeNode *left = helper(postorder,ir,inorder,s,mp[split]-1,mp);
         
