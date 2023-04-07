@@ -14,15 +14,19 @@ public:
     bool isBalanced(TreeNode* root) {
         if(!root)
             return true;
-        
-        int l = depth(root->left);
-        int r = depth(root->right);
-        
-        return abs(l-r)<2 && isBalanced(root->left) && isBalanced(root->right);
+        bool balanced=true;
+        depth(root,balanced);
+        return balanced;
     }
-    int depth(TreeNode*root){
-        if(!root)
+    
+    int depth(TreeNode *root, bool &bal){
+        if(!root || !bal)
             return 0;
-        return max(depth(root->left),depth(root->right))+1;
+        
+        int l = depth(root->left, bal);
+        int r = depth(root->right, bal);
+        bal &= abs(l-r)<2;
+        
+        return max(l,r)+1;
     }
 };
