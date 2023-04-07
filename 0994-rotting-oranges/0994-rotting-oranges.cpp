@@ -13,7 +13,7 @@ public:
         int res=0;
         while(!q.empty()){
             int s=q.size();
-            cout<<s<<endl;
+            // cout<<s<<endl;
             for(int i=0;i<s;i++){
                 auto x = q.front();
                 q.pop();
