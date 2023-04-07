@@ -12,11 +12,8 @@
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        return lendfs(root, 0);
-    }
-    int lendfs(TreeNode* root, int d){
         if(!root)
-            return d;
-        return max(lendfs(root->left, d+1), lendfs(root->right, d+1));
+            return 0;
+        return max(maxDepth(root->left),maxDepth(root->right))+1;
     }
 };
