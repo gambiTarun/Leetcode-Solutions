@@ -13,22 +13,21 @@ class Solution {
 public:
     TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
         unordered_map<int,int> mp;
-        for(int i=0;i<inorder.size();i++){
-            mp[inorder[i]]=i;
-        }
+        for(int i=0;i<inorder.size();i++)
+            mp[inorder[i]] = i;
         int ir=0;
-        return arrtoTree(preorder,inorder,ir,0,inorder.size()-1,mp);
+        return helper(preorder,ir,inorder,0,inorder.size()-1,mp);
     }
     
-    TreeNode* arrtoTree(vector<int>& preorder, vector<int>& inorder, int &iroot, int l, int r, unordered_map<int,int> &mp){
-        if(l>r)
-            return NULL;
-        int pivot = mp[preorder[iroot++]];
+    TreeNode *helper(vector<int>& preorder, int &p, vector<int>& inorder, int s, int e, unordered_map<int,int> &mp){
+        if(s>e)
+            return nullptr;
         
-        TreeNode *node = new TreeNode(inorder[pivot]);
+        int split = preorder[p++];
+        // cout<<split<<endl;
+        TreeNode *left = helper(preorder,p,inorder,s,mp[split]-1,mp);
+        TreeNode *right = helper(preorder,p,inorder,mp[split]+1,e,mp);
         
-        node->left = arrtoTree(preorder,inorder,iroot,l,pivot-1,mp);
-        node->right = arrtoTree(preorder,inorder,iroot,pivot+1,r,mp);
-        return node;
+        return new TreeNode(split,left,right);
     }
 };
