@@ -12,18 +12,19 @@
 class Solution {
 public:
     int diameterOfBinaryTree(TreeNode* root) {
-        if(!root)
-            return 0;
         int res=0;
-        longest(root,res);
+        depth(root,res);
         return res;
     }
-    int longest(TreeNode* root, int &dia){
+    
+    int depth(TreeNode* root, int &d){
         if(!root)
             return 0;
-        int lenl = longest(root->left, dia);
-        int lenr = longest(root->right, dia);
-        dia = max(dia, lenl+lenr);
-        return max(lenl,lenr)+1;
+        
+        int ld = depth(root->left,d);
+        int rd = depth(root->right,d);
+        d = max(d,ld+rd);
+        
+        return max(ld,rd)+1;
     }
 };
