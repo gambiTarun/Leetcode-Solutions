@@ -14,18 +14,15 @@ public:
     bool isBalanced(TreeNode* root) {
         if(!root)
             return true;
-        bool notbalnced=false;
-        longest(root,notbalnced);
-        return !notbalnced;
-    }
-    
-    int longest(TreeNode*node, bool &d){
-        if(!node)
-            return 0;
-        int l = longest(node->left,d);
-        int r = longest(node->right,d);
-        d |= abs(l-r)>1;
         
-        return max(l,r)+1;
+        int l = depth(root->left);
+        int r = depth(root->right);
+        
+        return abs(l-r)<2 && isBalanced(root->left) && isBalanced(root->right);
+    }
+    int depth(TreeNode*root){
+        if(!root)
+            return 0;
+        return max(depth(root->left),depth(root->right))+1;
     }
 };
