@@ -13,7 +13,7 @@ class Codec:
         def postorder(root):
             return postorder(root.left) + postorder(root.right) + [root.val] if root else []
         
-        print(' '.join(map(str, postorder(root))))
+        # print(' '.join(map(str, postorder(root))))
         return ' '.join(map(str, postorder(root)))
         
 
